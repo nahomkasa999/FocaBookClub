@@ -5,6 +5,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { BlogPostCard } from "@/components/general/BlogpostCard";
 import { redirect } from "next/navigation";
 
+export const dynamic = 'force-dynamic';
+
 async function getData(userId: string) {
   const data = await prisma.blogPost.findMany({
     where: {
