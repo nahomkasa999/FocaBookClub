@@ -21,15 +21,14 @@ interface IAppProps {
   };
 }
 
-function stripHtml(html: string) {
-  const tmp = document.createElement('div');
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || '';
-}
-
 export function BlogPostCard({ data }: IAppProps) {
   const [likes, setLikes] = useState(data.likes);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Simple server-safe HTML stripping
+  const stripHtml = (html: string) => {
+    return html.replace(/<[^>]*>/g, '');
+  };
 
   const handleLike = async () => {
     if (isLoading) return;
